@@ -12,5 +12,6 @@ class WalletTest {
 
         Assert.assertEquals(wallet.name, name)
         Assert.assertEquals(wallet.balance, 0.0)
+        Assert.assertTrue(wallet.transactions.isEmpty())
     }
 }
