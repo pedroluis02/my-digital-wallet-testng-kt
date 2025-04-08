@@ -7,6 +7,12 @@ class WalletController(initWallet: Wallet? = null) {
         get() = _wallet
 
     fun recharge(amount: Double) {
-        _wallet = _wallet.copy(balance = _wallet.balance + amount)
+        val newBalance = _wallet.balance + amount
+        val newTransaction = Transaction(amount, type = TransactionType.Recharge.name)
+
+        val transactions = _wallet.transactions.toMutableList()
+        transactions.add(newTransaction)
+
+        _wallet = _wallet.copy(balance = newBalance, transactions = transactions)
     }
 }

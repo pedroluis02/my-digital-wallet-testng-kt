@@ -12,8 +12,10 @@ class WalletControllerTest {
         val amount = 100.0
         controller.recharge(amount)
 
-        Assert.assertEquals(controller.wallet.name, "Default")
-        Assert.assertEquals(controller.wallet.balance, amount)
+        val wallet = controller.wallet
+        Assert.assertEquals(wallet.name, "Default")
+        Assert.assertEquals(wallet.balance, amount)
+        Assert.assertEquals(wallet.transactions.size, 1)
     }
 
     @Test
@@ -24,7 +26,9 @@ class WalletControllerTest {
         val amount = 100.0
         controller.recharge(amount)
 
-        Assert.assertEquals(controller.wallet.name, initialWallet.name)
-        Assert.assertEquals(controller.wallet.balance, initialWallet.balance + amount)
+        val wallet = controller.wallet
+        Assert.assertEquals(wallet.name, initialWallet.name)
+        Assert.assertEquals(wallet.balance, initialWallet.balance + amount)
+        Assert.assertEquals(wallet.transactions.size, 1)
     }
 }
