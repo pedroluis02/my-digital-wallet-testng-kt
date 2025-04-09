@@ -19,17 +19,20 @@ class WalletController(initWallet: Wallet? = null) {
                 if (it.transactions.isEmpty()) {
                     recharge(it.balance)
                 } else {
-                    _wallet = _wallet.copy(balance = it.balance)
+                    updateBalance(it.balance)
                 }
             }
         }
     }
 
     fun recharge(amount: Double) {
-        val newBalance = _wallet.balance + amount
-        val newTransaction = Transaction(amount, type = TransactionType.Recharge.name)
+        updateBalance(amount)
 
-        _wallet = _wallet.copy(balance = newBalance)
+        val newTransaction = Transaction(amount, type = TransactionType.Recharge.name)
         _transactions.add(newTransaction)
+    }
+
+    private fun updateBalance(amount: Double) {
+        _wallet = _wallet.copy(balance = _wallet.balance + amount)
     }
 }
