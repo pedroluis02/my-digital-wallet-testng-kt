@@ -29,6 +29,17 @@ class WalletControllerTest {
         val wallet = controller.wallet
         Assert.assertEquals(wallet.name, initialWallet.name)
         Assert.assertEquals(wallet.balance, initialWallet.balance + amount)
+        Assert.assertEquals(wallet.transactions.size, 2)
+    }
+
+    @Test
+    fun testShouldHaveInitialWalletWithAmountAndTransactions() {
+        val initialWallet = Wallet("Initial", 50.0, listOf(Transaction(50.0, TransactionType.Recharge.name)))
+        val controller = WalletController(initialWallet)
+
+        val wallet = controller.wallet
+        Assert.assertEquals(wallet.name, initialWallet.name)
+        Assert.assertEquals(wallet.balance, initialWallet.balance)
         Assert.assertEquals(wallet.transactions.size, 1)
     }
 }
