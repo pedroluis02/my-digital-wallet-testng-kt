@@ -26,6 +26,13 @@ class WalletController(initWallet: Wallet? = null) {
     }
 
     fun recharge(amount: Double) {
+        if (amount <= 0) {
+            throw WalletException(
+                WalletExceptionType.ZeroOrNegativeAmount, "Amount $amount must not be zero or " +
+                        "negative."
+            )
+        }
+
         updateBalance(amount)
 
         val newTransaction = Transaction(amount, type = TransactionType.Recharge.name)

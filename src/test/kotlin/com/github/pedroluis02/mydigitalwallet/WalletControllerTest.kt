@@ -18,6 +18,20 @@ class WalletControllerTest {
         Assert.assertEquals(wallet.transactions.size, 1)
     }
 
+    @Test(expectedExceptions = [WalletException::class])
+    fun testShouldNotRechargeZeroAmount() {
+        val controller = WalletController()
+
+        controller.recharge(0.0)
+    }
+
+    @Test(expectedExceptions = [WalletException::class])
+    fun testShouldNotRechargeNegativeAmount() {
+        val controller = WalletController()
+
+        controller.recharge(-1.0)
+    }
+
     @Test
     fun testShouldRechargeNextAmount() {
         val initialWallet = Wallet("Initial", 50.0)
