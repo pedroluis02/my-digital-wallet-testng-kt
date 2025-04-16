@@ -2,6 +2,10 @@ package com.github.pedroluis02.mydigitalwallet
 
 class WalletController(initWallet: Wallet? = null) {
 
+    companion object {
+        private val MIN_RECHARGE_AMOUNT = 3.0
+    }
+
     private var _wallet: Wallet = Wallet("Default")
     private var _transactions: MutableList<Transaction> = mutableListOf()
 
@@ -28,6 +32,10 @@ class WalletController(initWallet: Wallet? = null) {
     fun recharge(amount: Double) {
         if (amount <= 0) {
             throw WalletExceptions.newZeroOrNegativeAmount(amount)
+        }
+
+        if (amount < WalletConstants.MIN_RECHARGE_AMOUNT) {
+            throw WalletExceptions.newMinimumRechargeAmount(amount)
         }
 
         updateBalance(amount)

@@ -26,6 +26,13 @@ class WalletControllerTest {
     }
 
     @Test(expectedExceptions = [WalletException::class])
+    fun testShouldNotRechargeMinimumAmount() {
+        val controller = WalletController()
+
+        controller.recharge(2.0)
+    }
+
+    @Test(expectedExceptions = [WalletException::class])
     fun testShouldNotRechargeNegativeAmount() {
         val controller = WalletController()
 

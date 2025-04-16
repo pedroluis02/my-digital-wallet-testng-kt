@@ -6,4 +6,9 @@ object WalletExceptions {
         WalletExceptionType.ZeroOrNegativeAmount,
         "Amount $amount must not be zero or negative."
     )
+
+    fun newMinimumRechargeAmount(amount: Double) = WalletException(
+        WalletExceptionType.MinimumRechargeAmount,
+        "Minimum amount $amount must not ${WalletConstants.MIN_RECHARGE_AMOUNT}."
+    )
 }
