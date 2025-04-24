@@ -40,6 +40,17 @@ class WalletController(initWallet: Wallet? = null) {
         _transactions.add(newTransaction)
     }
 
+    fun pay(amount: Double) {
+        if (amount <= 0) {
+            throw WalletExceptions.newZeroOrNegativeAmount(amount)
+        }
+
+        updateBalance(-1 * amount)
+
+        val newTransaction = Transaction(amount, type = TransactionType.Payment.name)
+        _transactions.add(newTransaction)
+    }
+
     private fun updateBalance(amount: Double) {
         _wallet = _wallet.copy(balance = _wallet.balance + amount)
     }

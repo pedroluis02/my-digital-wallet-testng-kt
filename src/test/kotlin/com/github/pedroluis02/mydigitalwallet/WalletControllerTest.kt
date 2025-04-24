@@ -63,4 +63,16 @@ class WalletControllerTest {
         Assert.assertEquals(wallet.balance, initialWallet.balance)
         Assert.assertEquals(wallet.transactions.size, 1)
     }
+
+    @Test
+    fun testShouldPayAmountFromBalance() {
+        val controller = WalletController()
+        controller.recharge(100.0)
+
+        controller.pay(60.0)
+
+        val wallet = controller.wallet
+        Assert.assertEquals(wallet.balance, 40.0)
+        Assert.assertEquals(wallet.transactions.size, 2)
+    }
 }
