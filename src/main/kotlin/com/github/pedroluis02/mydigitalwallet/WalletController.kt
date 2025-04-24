@@ -45,6 +45,10 @@ class WalletController(initWallet: Wallet? = null) {
             throw WalletExceptions.newZeroOrNegativeAmount(amount)
         }
 
+        if (amount > wallet.balance) {
+            throw WalletExceptions.newInsufficientBalance(amount, wallet.balance)
+        }
+
         updateBalance(-1 * amount)
 
         val newTransaction = Transaction(amount, type = TransactionType.Payment.name)

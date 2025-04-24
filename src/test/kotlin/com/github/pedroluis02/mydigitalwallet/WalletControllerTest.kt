@@ -75,4 +75,12 @@ class WalletControllerTest {
         Assert.assertEquals(wallet.balance, 40.0)
         Assert.assertEquals(wallet.transactions.size, 2)
     }
+
+    @Test(expectedExceptions = [WalletException::class])
+    fun testShouldNotPayAmountForInsufficientBalance() {
+        val controller = WalletController()
+        controller.recharge(45.0)
+
+        controller.pay(50.0)
+    }
 }
